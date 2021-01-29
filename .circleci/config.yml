@@ -27,18 +27,18 @@ jobs:
       #     pkg-manager: yarn 
       - run:
           name: Run tests
-            command: |
-              npm run test:chrome:headless
-              npm run report:generate
-              zip -r allure-report.zip allure-report
-              - run:
-                  when: on_fail
-                  name: Generate fail results
-                  command: |
-                    npm run report:generate
-                    zip -r allure-report.zip allure-report
-              - store_artifacts:
-                  path: allure-report.zip
+          command: |
+            npm run test:chrome:headless
+            npm run report:generate
+            zip -r allure-report.zip allure-report
+      - run:
+          when: on_fail
+          name: Generate fail results
+          command: |
+            npm run report:generate
+            zip -r allure-report.zip allure-report
+      - store_artifacts:
+          path: allure-report.zip
 workflows:
   # Below is the definition of your workflow.
   # Inside the workflow, you provide the jobs you want to run, e.g this workflow runs the build-and-test job above.
